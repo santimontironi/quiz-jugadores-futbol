@@ -9,7 +9,8 @@ const Game = () => {
     const [players, setPlayers] = useState([])
     const [attempts, setAttempts] = useState(3)
     const [currentPlayer, setCurrentPlayer] = useState(0)
-    const [winner, setWinner] = useState(false)
+    const [score,setScore] = useState(0)
+    const [finish, setFinish] = useState(false)
 
     useEffect(() => {
         fetchPlayers().then((data) => setPlayers(data))
@@ -28,14 +29,17 @@ const Game = () => {
 
         if (player.trim().toLowerCase() === actualPlayer.name.toLowerCase()) {
             toast.success("Acertaste!", {
-                autoClose: 800
+                autoClose: 800,
+                position: "top-left"
             })
 
+            setScore((prev) => prev + 1)
+
             if (currentPlayer < players.length - 1) {
-                setCurrentPlayer(prev => prev + 1);
+                setCurrentPlayer((prev) => prev + 1);
             } else {
-                toast.info("¡Ganaste el juego!", { autoClose: 1500 });
-                setWinner(true);
+                toast.info("Juego terminado.", { autoClose: 1500 });
+                setFinish(true);
             }
         }else{
             toast.error("Jugador incorrecto.",{
@@ -43,8 +47,6 @@ const Game = () => {
             })
             setAttempts((prev) => prev - 1)
         }
-
-
     }
 
     return (
