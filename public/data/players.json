@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "Messi",
+        "silhouette": "/images/player1.png"
+    },
+    {
+        "id": 2,
+        "name": "Palmer",
+        "silhouette": "/images/player1.png"
+    }
+]

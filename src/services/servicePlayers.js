@@ -1,4 +1,4 @@
-export const fetchPlayers = async () => {
+const fetchPlayers = async () => {
     try{
         const res = await fetch('/data/players.json')
         const data = await res.json()
@@ -8,3 +8,5 @@ export const fetchPlayers = async () => {
         console.log("Error al cargar los jugadores", error)
     }
 }
+
+export default fetchPlayers
