@@ -8,5 +8,17 @@
         "id": 2,
         "name": "Palmer",
         "silhouette": "/images/player2.png"
+    },{
+        "id": 3,
+        "name": "Drogba",
+        "silhouette": "/images/player3.png"
+    },{
+        "id": 4,
+        "name": "Ronaldo",
+        "silhouette": "/images/player4.png"
+    },{
+        "id": 5,
+        "name": "Neymar",
+        "silhouette": "/images/player5.png"
     }
 ]
