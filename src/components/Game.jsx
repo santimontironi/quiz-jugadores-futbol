@@ -12,12 +12,16 @@ const Game = () => {
     const [score, setScore] = useState(0)
     const [finish, setFinish] = useState(false)
 
-    useEffect(() => {
+    function loadPlayers() {
         fetchPlayers().then((data) => {
-            const shuffled = [...data].sort(() => Math.random() - 0.5) 
+            const shuffled = [...data].sort(() => Math.random() - 0.5)
             setPlayers(shuffled)
         })
-    }, [])
+    }
+
+    useEffect(() => {
+        loadPlayers()
+    },[])
 
 
     const actualPlayer = players[currentPlayer]
@@ -31,7 +35,7 @@ const Game = () => {
             return
         }
 
-        if (player.trim().toLowerCase() === actualPlayer.name.toLowerCase()) {
+        if (actualPlayer.name.toString().toLowerCase().includes(player.toLowerCase())) {
             toast.success("Acertaste!", {
                 autoClose: 800,
                 position: "top-left"
@@ -42,7 +46,6 @@ const Game = () => {
             if (currentPlayer < players.length - 1) {
                 setCurrentPlayer((prev) => prev + 1);
             } else {
-                toast.info("Juego terminado.", { autoClose: 1500 });
                 setFinish(true);
             }
         } else {
@@ -52,6 +55,14 @@ const Game = () => {
             })
             setAttempts((prev) => prev - 1)
         }
+    }
+
+    function handleReset() {
+        loadPlayers()
+        setAttempts(3)
+        setCurrentPlayer(0)
+        setScore(0)
+        setFinish(false)
     }
 
     return (
@@ -70,6 +81,22 @@ const Game = () => {
             <Form GuessPlayer={handleGuess} />
 
             <ToastContainer />
+
+            {finish && (
+                <div className="fixed inset-0 flex items-center justify-center">
+
+                    <div className="absolute inset-0 bg-black/30 backdrop-blur-md"></div>
+
+
+                    <div className="relative w-[320px] lg:w-[400px] md:w-[600px] h-[200px] flex flex-col gap-[20px] items-center justify-center
+                    text-white rounded-2xl shadow-[10px_10px_10px_rgba(0,0,0,0.5)] p-[20px] bg-black/50">
+                        <h2 className="text-[20px]">Juego finalizado</h2>
+                        <p className="text-[20px]">Puntaje: {score}</p>
+                        <button onClick={handleReset}>Reiniciar</button>
+                    </div>
+                </div>
+            )}
+
         </div>
 
     )

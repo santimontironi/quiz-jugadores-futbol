@@ -6,7 +6,7 @@
     },
     {
         "id": 2,
-        "name": "Palmer",
+        "name": ["Cole Palmer", "Palmer"],
         "silhouette": "/images/player2.png"
     },{
         "id": 3,
@@ -14,7 +14,7 @@
         "silhouette": "/images/player3.png"
     },{
         "id": 4,
-        "name": "Ronaldo",
+        "name": ["Cr7", "Cristiano", "Ronaldo", "Cristiano Ronaldo"],
         "silhouette": "/images/player4.png"
     },{
         "id": 5,
