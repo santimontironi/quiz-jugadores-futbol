@@ -9,12 +9,16 @@ const Game = () => {
     const [players, setPlayers] = useState([])
     const [attempts, setAttempts] = useState(3)
     const [currentPlayer, setCurrentPlayer] = useState(0)
-    const [score,setScore] = useState(0)
+    const [score, setScore] = useState(0)
     const [finish, setFinish] = useState(false)
 
     useEffect(() => {
-        fetchPlayers().then((data) => setPlayers(data))
+        fetchPlayers().then((data) => {
+            const shuffled = [...data].sort(() => Math.random() - 0.5) 
+            setPlayers(shuffled)
+        })
     }, [])
+
 
     const actualPlayer = players[currentPlayer]
 
@@ -41,9 +45,10 @@ const Game = () => {
                 toast.info("Juego terminado.", { autoClose: 1500 });
                 setFinish(true);
             }
-        }else{
-            toast.error("Jugador incorrecto.",{
-                autoClose: 800
+        } else {
+            toast.error("Jugador incorrecto.", {
+                autoClose: 800,
+                position: "top-left"
             })
             setAttempts((prev) => prev - 1)
         }
