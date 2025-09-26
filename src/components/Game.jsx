@@ -21,7 +21,7 @@ const Game = () => {
 
     useEffect(() => {
         loadPlayers()
-    },[])
+    }, [])
 
 
     const actualPlayer = players[currentPlayer]
@@ -53,7 +53,13 @@ const Game = () => {
                 autoClose: 800,
                 position: "top-left"
             })
-            setAttempts((prev) => prev - 1)
+            setAttempts(prev => {
+                const newAttempts = prev - 1
+                if (newAttempts === 0) {
+                    setFinish(true)
+                }
+                return newAttempts
+            })
         }
     }
 
