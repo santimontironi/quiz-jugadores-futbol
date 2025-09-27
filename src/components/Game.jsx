@@ -40,21 +40,20 @@ const Game = () => {
                 autoClose: 800,
                 position: "top-center"
             })
-
             setScore((prev) => prev + 1)
 
-            if (currentPlayer < players.length - 1) {
-                setCurrentPlayer((prev) => prev + 1);
-            } else {
-                setFinish(true);
-            }
         } else {
             toast.error("Jugador incorrecto.", {
                 autoClose: 800,
                 position: "top-left"
             })
-
             setAttempts((prev) => prev - 1)
+        }
+
+        if (currentPlayer < players.length - 1) {
+            setCurrentPlayer((prev) => prev + 1);
+        } else {
+            setFinish(true);
         }
     }
 
