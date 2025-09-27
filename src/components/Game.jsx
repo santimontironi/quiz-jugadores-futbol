@@ -38,7 +38,7 @@ const Game = () => {
         if (actualPlayer.name.toString().toLowerCase().includes(player.toLowerCase())) {
             toast.success("Acertaste!", {
                 autoClose: 800,
-                position: "top-left"
+                position: "top-center"
             })
 
             setScore((prev) => prev + 1)
@@ -53,13 +53,8 @@ const Game = () => {
                 autoClose: 800,
                 position: "top-left"
             })
-            setAttempts(prev => {
-                const newAttempts = prev - 1
-                if (newAttempts === 0) {
-                    setFinish(true)
-                }
-                return newAttempts
-            })
+
+            setAttempts((prev) => prev - 1)
         }
     }
 
@@ -88,7 +83,7 @@ const Game = () => {
 
             <ToastContainer />
 
-            {finish && (
+            {(finish || attempts === 0) && (
                 <div className="fixed inset-0 flex items-center justify-center">
 
                     <div className="absolute inset-0 bg-black/30 backdrop-blur-md"></div>
